@@ -34,8 +34,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setMode(selectedMode: Int) {
         when(selectedMode){
-            R.id.action_about->{
-
+            R.id.about_page->{
+                val moveIntent = Intent(this@MainActivity,About::class.java)
+                startActivity(moveIntent)
             }
         }
     }
