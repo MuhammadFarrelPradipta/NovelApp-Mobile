@@ -45,5 +45,11 @@ class MainActivity : AppCompatActivity() {
         rvNovel.layoutManager = LinearLayoutManager(this)
         val listNovelAdapter = ListNovelAdapter(list)
         rvNovel.adapter = listNovelAdapter
+
+        listNovelAdapter.setOnItemClickCallback(object : ListNovelAdapter.OnItemClickCallback {
+            override fun onItemClicked(data: Novel) {
+                startActivity(Intent(this@MainActivity,Detail::class.java))
+            }
+        })
     }
 }

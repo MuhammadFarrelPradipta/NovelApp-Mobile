@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,6 +17,15 @@ class ListNovelAdapter(private val listNovel : ArrayList<Novel>) : RecyclerView.
         var tvName : TextView = itemView.findViewById(R.id.tv_item_name)
         var tvDetail :TextView = itemView.findViewById(R.id.tv_item_detail)
         var imgPhoto : ImageView = itemView.findViewById(R.id.img_item_photo)
+    }
+
+    private lateinit var onItemClickCallback: OnItemClickCallback
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+    interface OnItemClickCallback {
+        fun onItemClicked(data: Novel)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
@@ -33,6 +43,8 @@ class ListNovelAdapter(private val listNovel : ArrayList<Novel>) : RecyclerView.
 
         holder.tvName.text = novel.name
         holder.tvDetail.text = novel.detail
+
+        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listNovel[holder.adapterPosition]) }
     }
 
     override fun getItemCount(): Int {
