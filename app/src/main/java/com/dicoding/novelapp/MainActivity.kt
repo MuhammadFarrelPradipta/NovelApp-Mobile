@@ -48,7 +48,11 @@ class MainActivity : AppCompatActivity() {
 
         listNovelAdapter.setOnItemClickCallback(object : ListNovelAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Novel) {
-                startActivity(Intent(this@MainActivity,Detail::class.java))
+               val moveIntent =  Intent(this@MainActivity,Detail::class.java)
+                moveIntent.putExtra(Detail.EXTRA_JUDUL, data.name)
+                moveIntent.putExtra(Detail.EXTRA_SINOPSIS, data.detail)
+                moveIntent.putExtra(Detail.EXTRA_FOTO, data.photo)
+                startActivity(moveIntent)
             }
         })
     }
